@@ -3,6 +3,7 @@ package com.example.restaurant_service.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.yaml.snakeyaml.DumperOptions;
 
 @Entity
 @Table(name = "menu_items")
@@ -21,6 +22,8 @@ public class MenuItem {
     private String description;
     private Double price;
 
-    private
+    @ManyToOne
+    @JoinColumn(name = "menu_id", nullable = false)
+    private Menu menu;
 
 }

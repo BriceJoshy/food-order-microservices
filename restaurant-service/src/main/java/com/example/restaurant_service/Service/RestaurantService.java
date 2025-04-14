@@ -1,29 +1,37 @@
 package com.example.restaurant_service.Service;
 
 
+import com.example.restaurant_service.Dto.RestaurantDto;
+import com.example.restaurant_service.Entity.Restaurant;
 import com.example.restaurant_service.Repository.RestaurantRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+
+@Service
 public class RestaurantService {
 
-    @Autowired
     private final RestaurantRepository restaurantRepository;
 
     public RestaurantService(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
 
-    public FoodModel createFoodItem(FoodModel food){
-        return restaurantRepository.save(food);
+    public Restaurant createRestaurant(RestaurantDto dto){
+        Restaurant rest = Restaurant.builder()
+                .restaurantName(dto.getRestaurantName())
+                .address(dto.getAddress())
+                .build();
+        return restaurantRepository.save(rest);
     }
 
-    public Optional<FoodModel> getFoodItemById(Long id){
-        return restaurantRepository.findById(id);
-    }
-    public List<FoodModel> displayMenu(){
+    public List<Restaurant> getAllRestaurants(){
         return restaurantRepository.findAll();
+    }
+
+    public Optional<Restaurant> getRestaurantById(Long id){
+        return restaurantRepository.findById(id);
     }
 }
