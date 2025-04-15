@@ -1,6 +1,7 @@
 package com.example.order_service.Controller;
 
 
+import com.example.order_service.Dto.MenuItemDto;
 import com.example.order_service.Dto.ResponseDto;
 import com.example.order_service.Entity.OrderModel;
 import com.example.order_service.Service.OrderService;
@@ -8,6 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
@@ -27,6 +30,15 @@ public class OrderController {
         var response = getResponseDto("Order created with id: " + res.getId(),
                 HttpStatus.CREATED);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("/place/{restaurantId}")
+    public ResponseEntity<List<MenuItemDto>> placeOrder(
+            @PathVariable Long restaurantId,
+            @RequestBody List<Long> itemIds) {
+
+        List<MenuItemDto> items = orderService.getItemsForOrder(restaurantId, itemIds);
+        return ResponseEntity.ok(items);
     }
 
     private static ResponseDto getResponseDto(Object message, HttpStatus status) {
