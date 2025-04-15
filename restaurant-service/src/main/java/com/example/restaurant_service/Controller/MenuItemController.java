@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/restaurant/{restaurantId}/order/items")
+@RequestMapping("/restaurant")
 public class MenuItemController {
 
     private final MenuItemService menuItemService;
@@ -19,7 +19,7 @@ public class MenuItemController {
     }
 
 
-    @GetMapping()
+    @PostMapping("/{restaurantId}/order/items")
     public ResponseEntity<List<MenuItem>> getOrderItems(
             @PathVariable Long restaurantId,
             @RequestBody List<Long> itemIds
