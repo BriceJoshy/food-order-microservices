@@ -1,5 +1,6 @@
 package com.example.restaurant_service.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,7 @@ public class Restaurant {
     private String address;
 
     @OneToOne(mappedBy = "restaurant" , cascade = CascadeType.ALL)
+    @JsonManagedReference // Marks Restaurant as the parent (prevents recursion)
     private Menu menu;
 
 

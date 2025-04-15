@@ -28,7 +28,7 @@ public class RestaurantController {
 
 
         var res = restaurantService.createRestaurant(restaurantDto);
-        var response = getResponseDto("Restaurant created with id: " + res.getRestaurantId(),
+        var response = ResponseDto.getResponseDto("Restaurant created with id: " + res.getRestaurantId(),
                 HttpStatus.CREATED);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -46,10 +46,10 @@ public class RestaurantController {
     }
 
 
-    private static ResponseDto getResponseDto(Object message, HttpStatus status) {
-        return ResponseDto.builder()
-                .message(message)
-                .status(status)
-                .build();
-    }
+//    private static ResponseDto getResponseDto(Object message, HttpStatus status) {
+//        return ResponseDto.builder()
+//                .message(message)
+//                .status(status)
+//                .build();
+//    }
 }

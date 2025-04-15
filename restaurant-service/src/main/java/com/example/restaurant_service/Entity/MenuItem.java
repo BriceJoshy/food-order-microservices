@@ -1,6 +1,7 @@
 package com.example.restaurant_service.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.yaml.snakeyaml.DumperOptions;
@@ -24,6 +25,7 @@ public class MenuItem {
 
     @ManyToOne
     @JoinColumn(name = "menu_id", nullable = false)
+    @JsonBackReference
     private Menu menu;
 
 }

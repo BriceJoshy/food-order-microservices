@@ -11,4 +11,11 @@ import org.springframework.http.HttpStatus;
 public class ResponseDto {
     private HttpStatus status;
     private Object message;
+
+    public static ResponseDto getResponseDto(Object message, HttpStatus status) {
+        return ResponseDto.builder()
+                .message(message)
+                .status(status)
+                .build();
+    }
 }
